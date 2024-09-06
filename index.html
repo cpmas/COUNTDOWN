@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .countdown-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .countdown {
+            font-size: 2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="countdown-container">
+        <h1>CAPY COUNTDOWN</h1>
+        <div id="countdown" class="countdown">Loading...</div>
+    </div>
+
+    <script>
+        // Set the target date and time (20 September 2024 10:00 AM AEST)
+        const targetDate = new Date("2024-09-20T10:00:00+10:00").getTime();
+
+        // Update the countdown every 1 second
+        const countdownInterval = setInterval(function() {
+            // Get current date and time
+            const now = new Date().getTime();
+
+            // Find the time difference between now and the target date
+            const timeRemaining = targetDate - now;
+
+            // Calculate days, hours, minutes, and seconds
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            // Display the countdown
+            document.getElementById("countdown").innerHTML = 
+                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+            // If the countdown is finished, display a message
+            if (timeRemaining < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").innerHTML = "The event has started!";
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
